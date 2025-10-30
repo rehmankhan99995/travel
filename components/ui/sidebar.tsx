@@ -1,18 +1,17 @@
 "use client"
-
-import { cn } from "@/lib/utils"
-import { CreditCard, Home, LogOut, Map, User } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Home, CreditCard, Map, User, LogOut } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function Sidebar() {
   const pathname = usePathname()
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home, url:"/" },
-    { id: "payments", label: "Payments", icon: CreditCard },
-    { id: "journeys", label: "Journeys", icon: Map },
-    { id: "profile", label: "Profile", icon: User },
+    { id: "dashboard", label: "Dashboard", icon: Home, href: "/" },
+    { id: "payments", label: "Payments", icon: CreditCard, href: "/payments" },
+    { id: "journeys", label: "Journeys", icon: Map, href: "/journeys" },
+    { id: "profile", label: "Profile", icon: User, href: "/profile" },
   ]
 
   const getIsActive = (href: string) => {
@@ -23,26 +22,25 @@ export function Sidebar() {
   }
 
   return (
-    <div className="h-screen w-64 bg-black flex flex-col p-6">
+    <div className="h-full w-[270px] bg-black flex flex-col p-6">
       {/* Logo */}
       <div className="mb-8">
-        <h1 className="text-white text-2xl font-bold text-center">Kalma Travels</h1>
+        <h1 className="text-white text-2xl font-bold text-center">Kalma Travel</h1>
       </div>
 
       {/* Navigation Items */}
       <nav className="flex-1 space-y-3">
         {menuItems.map((item) => {
           const Icon = item.icon
-          const isActive = activeItem === item.id
-
+          const isActive = getIsActive(item.href)
 
           return (
             <Link
               key={item.id}
-              onClick={() => setActiveItem(item.id)}
+              href={item.href}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                isActive ? "bg-white text-black" : "text-gray-400 hover:text-white"
+                isActive ? "bg-white text-black" : "text-gray-400 hover:text-white",
               )}
             >
               <Icon size={20} />
@@ -53,7 +51,7 @@ export function Sidebar() {
       </nav>
 
       {/* Logout Button */}
-      <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white transition-colors rounded-lg">
+      <button className="w-full flex mt-8 items-center gap-3 px-4 py-3 text-gray-400 hover:text-white transition-colors rounded-lg">
         <LogOut size={20} />
         <span className="font-medium">Logout</span>
       </button>

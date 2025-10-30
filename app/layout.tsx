@@ -27,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         <div className="flex w-screen">
-          <div className="w-[260px]">
+          <div className="w-[20%]">
             <Sidebar />
           </div>
-          <div className="w-[1200px]">
+          <div className="w-[80%]">
             <div className="border-b border-[#dbdadd]">
             <NavBar />
             </div>
