@@ -9,10 +9,10 @@ export function Sidebar() {
   const pathname = usePathname()
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home, href: "/" },
-    { id: "payments", label: "Payments", icon: CreditCard, href: "/payments" },
-    { id: "journeys", label: "Journeys", icon: Map, href: "/journeys" },
-    { id: "profile", label: "Profile", icon: User, href: "/profile" },
+    { id: "dashboard", label: "Dashboard", icon: Home, url:"/" },
+    { id: "payments", label: "Payments", icon: CreditCard },
+    { id: "journeys", label: "Journeys", icon: Map },
+    { id: "profile", label: "Profile", icon: User },
   ]
 
   const getIsActive = (href: string) => {
@@ -33,15 +33,16 @@ export function Sidebar() {
       <nav className="flex-1 space-y-3">
         {menuItems.map((item) => {
           const Icon = item.icon
-          const isActive = getIsActive(item.href)
+          const isActive = activeItem === item.id
+
 
           return (
             <Link
               key={item.id}
-              href={item.href}
+              onClick={() => setActiveItem(item.id)}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                isActive ? "bg-white text-black" : "text-gray-400 hover:text-white",
+                isActive ? "bg-white text-black" : "text-gray-400 hover:text-white"
               )}
             >
               <Icon size={20} />
