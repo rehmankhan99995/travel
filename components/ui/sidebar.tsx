@@ -1,19 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { Home, CreditCard, Map, User, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { CreditCard, Home, LogOut, Map, User } from "lucide-react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function Sidebar() {
-  const [activeItem, setActiveItem] = useState("dashboard")
+  const pathname = usePathname()
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home, url:"/" },
-    { id: "payments", label: "Payments", icon: CreditCard },
-    { id: "journeys", label: "Journeys", icon: Map },
-    { id: "profile", label: "Profile", icon: User },
+    { id: "dashboard", label: "Dashboard", icon: Home, href: "/" },
+    { id: "payments", label: "Payments", icon: CreditCard, href: "/payments" },
+    { id: "journeys", label: "Journeys", icon: Map, href: "/journeys" },
+    { id: "profile", label: "Profile", icon: User, href: "/profile" },
   ]
+
+  const getIsActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/"
+    }
+    return pathname.startsWith(href)
+  }
 
   return (
     <div className="h-screen w-64 bg-black flex flex-col p-6">
@@ -26,13 +33,12 @@ export function Sidebar() {
       <nav className="flex-1 space-y-3">
         {menuItems.map((item) => {
           const Icon = item.icon
-          const isActive = activeItem === item.id
-
+          const isActive = getIsActive(item.href)
 
           return (
-            <button
+            <Link
               key={item.id}
-              onClick={() => setActiveItem(item.id)}
+              href={item.href}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
                 isActive ? "bg-white text-black" : "text-gray-400 hover:text-white",
@@ -40,8 +46,7 @@ export function Sidebar() {
             >
               <Icon size={20} />
               <span className="font-medium">{item.label}</span>
-              <Link href={}></Link>
-            </button>
+            </Link>
           )
         })}
       </nav>
