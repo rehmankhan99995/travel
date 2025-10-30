@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 import { MapPin } from "lucide-react";
-import { Calendar } from 'lucide-react';
-import { Earth } from 'lucide-react';
-
-
-
+import { Calendar } from "lucide-react";
+import { Earth } from "lucide-react";
 
 export default function Journeys() {
   const [dateRange, setDateRange] = useState({ from: 2022, to: 2023 });
@@ -187,10 +184,10 @@ export default function Journeys() {
             </div>
             <div className="flex justify-between mt-6">
               <p className="text-base font-semibold text-gray-900 mt-4">
-                Miles of the year 
+                Miles of the year
               </p>
               <div className="p-2 bg-purple-100 rounded-full ">
-                <Calendar/>
+                <Calendar />
               </div>
             </div>
           </div>
@@ -200,7 +197,6 @@ export default function Journeys() {
             <div className="flex items-start justify-between">
               <div className="flex gap-1">
                 <p className="text-3xl font-bold text-gray-900">RyanAir</p>
-               
               </div>
             </div>
             <div className="flex justify-between mt-6">
@@ -208,7 +204,7 @@ export default function Journeys() {
                 Company most used
               </p>
               <div className="p-2 bg-purple-100 rounded-full ">
-              <Earth/>
+                <Earth />
               </div>
             </div>
           </div>
@@ -253,8 +249,7 @@ export default function Journeys() {
             </div>
           </div>
           <div className="flex justify-end  mt-7 mr-40">
-                 <p className="text-base text-gray-500">Date</p>
-           
+            <p className="text-base text-gray-500">Date</p>
           </div>
         </div>
       </main>
