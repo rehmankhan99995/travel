@@ -16,7 +16,7 @@ export default function Journeys() {
       preserveAspectRatio="xMidYMid slice"
     >
       {/* Background */}
-      <rect width="1000" height="600" fill="#f3f0ff" />
+      <rect width="1000" height="600" fill="#ffffff" />
 
       {/* Hexagonal grid pattern */}
       <defs>
@@ -169,7 +169,7 @@ export default function Journeys() {
                 Total Miles
               </p>
               <div className="p-2 bg-purple-100 rounded-full ">
-                <MapPin />
+                <MapPin className="text-black" />
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function Journeys() {
                 Miles of the year
               </p>
               <div className="p-2 bg-purple-100 rounded-full ">
-                <Calendar />
+                <Calendar className="text-black" />
               </div>
             </div>
           </div>
@@ -204,26 +204,26 @@ export default function Journeys() {
                 Company most used
               </p>
               <div className="p-2 bg-purple-100 rounded-full ">
-                <Earth />
+                <Earth className="text-black"/>
               </div>
             </div>
           </div>
         </div>
 
         {/* Your Next Trip Section */}
-        <div className="mb-8">
+        <div className="">
           <h2 className="text-lg font-bold text-gray-900 mb-4">
             Your next trip
           </h2>
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="h-80">
+            <div className="h-3/4">
               <WorldMap />
             </div>
           </div>
         </div>
 
         {/* Flight Information Section */}
-        <div className="bg-purple-50 rounded-lg border border-purple-200 p-6">
+        <div className="bg-[#8383831a]  border border-purple-200 rounded-lg p-6">
           <div className="flex items-center justify-between">
             <h3 className="text-2xl font-bold text-gray-900">
               Flight Information

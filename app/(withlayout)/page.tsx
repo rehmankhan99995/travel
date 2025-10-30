@@ -1,7 +1,6 @@
 import { Calendar } from "lucide-react";
 import { CirclePoundSterling } from "lucide-react";
 import { Banknote } from "lucide-react";
-import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
