@@ -20,65 +20,63 @@ export default function TravelSignup() {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b flex items-center justify-center p-6">
+    <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Outer White Container */}
-      <div className=" rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row w-full max-w-[1360px] mx-auto">
+      <div className="w-full h-full max-w-[1600px] rounded-none lg:rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-[0_0_40px_rgba(0,0,0,0.15)] mx-auto">
+        
         {/* Left Panel - Hero Section */}
-        <div className="relative lg:w-[880px] h-[900px] lg:h-auto">
-          <div className="relative">
-            <img
-              src={currentSlideData.image}
-              alt={currentSlideData.location}
-              className="w-full object-cover rounded-3xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-3xl" />
-          </div>
+        <div className="relative lg:w-[880px] h-[400px] lg:h-screen flex-shrink-0">
+          {/* Background Image */}
+          <img
+            src={currentSlideData.image}
+            alt={currentSlideData.location}
+            className="w-full h-full object-cover rounded-none lg:rounded-3xl"
+          />
 
-          {/* Hero Content */}
-          <div className="absolute inset-0 flex flex-col justify-between p-8">
-            <div className="flex justify-between items-start">
-              <h1 className="text-white text-2xl font-bold">
-                Travel <span className="font-light">Explore</span>
-              </h1>
-              <span className="text-white text-lg font-light">
-                {currentSlideData.slideNumber}
-              </span>
-            </div>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-none lg:rounded-3xl" />
 
-            <div className="space-y-4">
-              <p className="text-cyan-300 text-sm font-medium">
+          {/* Hero Content Inside the Image */}
+          <div className="absolute inset-0 flex flex-col justify-center px-10 lg:px-16 text-left text-white">
+            <div className="max-w-md space-y-4">
+              <p className="text-cyan-300 text-sm font-medium uppercase tracking-wider">
                 {currentSlideData.location}
               </p>
-              <h2 className="text-white text-3xl font-bold leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
                 {currentSlideData.title}
               </h2>
-              <p className="text-white/90 text-sm max-w-md">
+              <p className="text-white/90 text-base leading-relaxed">
                 {currentSlideData.description}
               </p>
-              <button className="bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-6 py-2 rounded-lg">
+              <button className="mt-4 bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-semibold px-8 py-3 rounded-lg shadow-md transition">
                 Explore
               </button>
             </div>
 
-            {/* Carousel Dots */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentSlide
-                      ? "bg-white w-8"
-                      : "bg-white/50 w-2"
-                  }`}
-                />
-              ))}
-            </div>
+            {/* Slide Number Top Right */}
+            <span className="absolute top-6 right-8 text-white text-lg font-light">
+              {currentSlideData.slideNumber}
+            </span>
+          </div>
+
+          {/* Carousel Dots */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentSlide
+                    ? "bg-white w-8"
+                    : "bg-white/50 w-2"
+                }`}
+              />
+            ))}
           </div>
         </div>
 
         {/* Right Panel - Signup Form */}
-        <div className="flex-1 flex items-center justify-center p-10">
+        <div className="flex-1 flex items-center justify-center p-10 bg-white">
           <div className="w-full max-w-sm">
             <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
               Create your Account

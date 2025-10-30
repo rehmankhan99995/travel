@@ -22,7 +22,7 @@ export default function TravelLogin() {
   return (
     <div className="min-h-screen bg-gradient-to-b flex items-center justify-center p-6">
       {/* Outer White Container */}
-      <div className=" rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row w-full max-w-[1360px] mx-auto">
+      <div className="h-screen rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full max-w-[1360px] mx-auto">
         {/* Left Panel - Hero Section */}
         <div className="relative lg:w-[880px] h-[900px] lg:h-auto">
           <div className="relative">
