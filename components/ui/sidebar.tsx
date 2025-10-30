@@ -22,10 +22,10 @@ export function Sidebar() {
   }
 
   return (
-    <div className="h-full w-[270px] bg-black flex flex-col p-6">
+    <div className="h-full w-[270px] bg-blue-700 flex flex-col p-6">
       {/* Logo */}
       <div className="mb-8">
-        <h1 className="text-white text-2xl font-bold text-center">Kalma Travel</h1>
+        <h1 className="text-white text-2xl font-bold text-center">Kalma Travels</h1>
       </div>
 
       {/* Navigation Items */}
@@ -40,7 +40,7 @@ export function Sidebar() {
               href={item.href}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                isActive ? "bg-white text-black" : "text-gray-400 hover:text-white",
+                isActive ? "bg-white text-black" : "text-white hover:text-gray-800",
               )}
             >
               <Icon size={20} />
@@ -51,7 +51,7 @@ export function Sidebar() {
       </nav>
 
       {/* Logout Button */}
-      <button className="w-full flex mt-8 items-center gap-3 px-4 py-3 text-gray-400 hover:text-white transition-colors rounded-lg">
+      <button className="w-full flex mt-8 items-center gap-3 px-4 py-3 text-white hover:text-gray-800 transition-colors rounded-lg">
         <LogOut size={20} />
         <span className="font-medium">Logout</span>
       </button>
