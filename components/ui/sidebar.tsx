@@ -40,7 +40,7 @@ export function Sidebar() {
               href={item.href}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                isActive ? "bg-white text-black" : "text-white hover:text-gray-800",
+                isActive ? "bg-white text-black" : "text-white hover:text-white cursor-pointer",
               )}
             >
               <Icon size={20} />
@@ -51,7 +51,7 @@ export function Sidebar() {
       </nav>
 
       {/* Logout Button */}
-      <button className="w-full flex mt-8 items-center gap-3 px-4 py-3 text-white hover:text-gray-800 transition-colors rounded-lg">
+      <button className="w-full flex mt-8 items-center gap-3 px-4 py-3 text-white hover:text-white cursor-pointer transition-colors rounded-lg">
         <LogOut size={20} />
         <span className="font-medium">Logout</span>
       </button>
