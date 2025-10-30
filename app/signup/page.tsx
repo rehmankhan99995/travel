@@ -94,7 +94,7 @@ export default function TravelSignup() {
                 <input
                   type="text"
                   id="name"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-lg border text-black border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Enter your name"
                   required
                 />
@@ -111,7 +111,7 @@ export default function TravelSignup() {
                 <input
                   type="email"
                   id="email"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-lg border text-black border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Enter your email"
                   required
                 />
@@ -128,7 +128,7 @@ export default function TravelSignup() {
                 <input
                   type="password"
                   id="password"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-lg border text-black border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Create a password"
                   required
                 />
@@ -145,19 +145,21 @@ export default function TravelSignup() {
                 <input
                   type="password"
                   id="confirmPassword"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-lg border text-black placeholder:text-[#838383] border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Confirm your password"
                   required
                 />
               </div>
 
               {/* Submit */}
+              <Link href={"/login"}>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Sign Up
               </button>
+              </Link>
 
               {/* Switch to Login */}
               <p className="text-base text-gray-600 text-center">

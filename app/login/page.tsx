@@ -128,13 +128,14 @@ export default function TravelLogin() {
               </div>
 
               {/* Submit */}
+              <Link href={"/"}>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Log In
               </button>
-
+              </Link>
               {/* Switch to Signup */}
               <p className="text-base text-gray-600 text-center">
                 Don’t have an account?{" "}
