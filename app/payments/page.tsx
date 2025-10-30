@@ -74,30 +74,30 @@ export default function Payments() {
         {/* Top Section */}
         <div className="flex items-start justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-1">Payments</h1>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">My Plans</h2>
+            <h1 className="text-3xl font-bold text-black mb-1">Payments</h1>
+            <h2 className="text-2xl font-bold text-black mb-1">My Plans</h2>
             <p className="text-sm text-gray-900">
               Your Plan is up for your need!
             </p>
           </div>
-          <button className="bg-gray-900 text-white px-5 py-2 rounded text-sm font-semibold hover:bg-gray-800">
+          <button className="bg-black text-white px-5 py-2 rounded text-base cursor-pointer">
             Make a new payment
           </button>
         </div>
 
         {/* Plan Card */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8 w-[300px]">
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-8 w-[350px]">
           <div className="mb-6">
-            <p className="text-sm text-gray-900 font-bold mt-1">Actual Plan</p>
-            <h3 className="text-lg font-bold text-purple-200">
+            <p className="text-sm text-gray-900 font-semibold mt-1">Actual Plan</p>
+            <h3 className="text-xl font-bold text-purple-300">
               Passenger <span className="text-gray-800 text-lg">Buddy</span> 
             </h3>
           </div>
           <div className="flex gap-5">
-            <button className="bg-gray-900 text-white px-4 py-2 rounded-[10px] text-xs font-semibold hover:bg-gray-800">
+            <button className="bg-black text-white px-4 py-2 cursor-pointer rounded-[10px] text-sm">
               Explore Plans
             </button>
-            <button className="border-3 border-gray-500 text-gray-900 px-4 py-2 rounded-[10px] text-xs font-semibold hover:bg-gray-50">
+            <button className="border border-black cursor-pointer text-black px-4 py-2 rounded-[10px] text-sm">
               Manage Plans
             </button>
           </div>
@@ -106,7 +106,7 @@ export default function Payments() {
         {/* Payment History Section */}
         <div>
           <div className="mb-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-1">
+            <h2 className="text-2xl font-bold text-black mb-1">
               Payment History
             </h2>
             <p className="text-xs text-gray-500">
@@ -115,7 +115,7 @@ export default function Payments() {
           </div>
 
           {/* Table */}
-          <div className="bg-white rounded border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
             <table className="w-full">
               <thead>
                 <tr className="">
