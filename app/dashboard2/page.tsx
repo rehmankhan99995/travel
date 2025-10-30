@@ -229,7 +229,7 @@ export default function Dashboard() {
                   <div className="text-xs text-slate-500 uppercase tracking-wide mb-2 font-medium">
                     Name
                   </div>
-                  <div className="font-medium text-slate-900">
+                  <div className="font-bold text-slate-900">
                     Muhammad Mahjupri
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function Dashboard() {
                   <div className="text-xs text-slate-500 uppercase tracking-wide mb-2 font-medium">
                     Email
                   </div>
-                  <div className="text-sm text-slate-700 break-all">
+                  <div className="text-base font-bold text-slate-900 break-all">
                     mahjupri123@gmail.com
                   </div>
                 </div>
@@ -247,14 +247,14 @@ export default function Dashboard() {
                   <div className="text-xs text-slate-500 uppercase tracking-wide mb-2 font-medium">
                     Passport Number
                   </div>
-                  <div className="font-medium text-slate-900">23454422</div>
+                  <div className="font-bold text-slate-900">23454422</div>
                 </div>
 
                 <div>
                   <div className="text-xs text-slate-500 uppercase tracking-wide mb-2 font-medium">
                     Airline Booking Code
                   </div>
-                  <div className="font-medium text-slate-900">GI38522</div>
+                  <div className="font-bold text-slate-900">GI38522</div>
                 </div>
               </div>
             </div>
