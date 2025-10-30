@@ -3,17 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function TravelSignup() {
+export default function TravelLogin() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      location: "Explore the Maldives",
-      title: "Adventure awaits beyond the horizon",
+      location: "Wonderful Mauritius",
+      title: "Just Living is not enough, one must have sunshine",
       description:
-        "Join us today and discover unforgettable destinations and experiences.",
+        "Discover the most unique places, experiences and amazing homes around the world.",
       image: "/bg.png",
-      slideNumber: "02/04",
+      slideNumber: "01/04",
     },
   ];
 
@@ -77,36 +77,18 @@ export default function TravelSignup() {
           </div>
         </div>
 
-        {/* Right Panel - Signup Form */}
+        {/* Right Panel - Login Form */}
         <div className="flex-1 flex items-center justify-center p-10">
           <div className="w-full max-w-sm">
             <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-              Create your Account
+              Login to Continue
             </h3>
 
             <form className="space-y-4">
-              {/* Full Name */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-base font-medium text-gray-700"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-
-              {/* Email */}
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-base font-medium text-gray-700"
+                  className="block text-lg font-medium text-gray-700"
                 >
                   Email
                 </label>
@@ -119,11 +101,10 @@ export default function TravelSignup() {
                 />
               </div>
 
-              {/* Password */}
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-base font-medium text-gray-700"
+                  className="block text-lg font-medium text-gray-700"
                 >
                   Password
                 </label>
@@ -131,44 +112,25 @@ export default function TravelSignup() {
                   type="password"
                   id="password"
                   className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Create a password"
+                  placeholder="Enter your password"
                   required
                 />
               </div>
 
-              {/* Confirm Password */}
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-base font-medium text-gray-700"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Confirm your password"
-                  required
-                />
-              </div>
-
-              {/* Submit */}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Sign Up
+                Log In
               </button>
 
-              {/* Switch to Login */}
               <p className="text-base text-gray-600 text-center">
-                Already have an account?{" "}
+                Don’t have an account?{" "}
                 <Link
-                  href="/login"
+                  href="/signup"
                   className="text-blue-600 font-medium hover:underline"
                 >
-                  Log in
+                  Sign up
                 </Link>
               </p>
             </form>
