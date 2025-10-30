@@ -70,13 +70,13 @@ export default function Profile() {
                     Intermediate
                   </span>
                 </p>
-                <div className="w-200 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="w-[550px] h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div className="h-full w-2/6 bg-green-500 rounded-full" />
                 </div>
               </div>
 
               {/* Form */}
-              <div className="space-y-6">
+              <div className="bg-white border-none py-3 px-2 rounded-lg shadow-sm space-y-6">
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="text-xs font-semibold text-gray-900 mb-2 block">
@@ -87,7 +87,7 @@ export default function Profile() {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-black text-sm"
                     />
                   </div>
                   <div>
@@ -99,7 +99,7 @@ export default function Profile() {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-black"
                     />
                   </div>
                 </div>
@@ -111,14 +111,14 @@ export default function Profile() {
                     </label>
                     <div className="flex gap-2">
                       <div className="flex items-center px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg">
-                        <span className="text-sm text-gray-600">🇺🇸 +1</span>
+                        <span className="flex items-center text-sm text-gray-600"><img src="/americaflag.svg" alt="" className="h-4 w-4" /> +1</span>
                       </div>
                       <input
                         type="text"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="flex-1 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                        className="flex-1 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-black text-sm"
                       />
                     </div>
                   </div>
@@ -131,7 +131,7 @@ export default function Profile() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 bg-gray-50 border text-black border-gray-200 rounded-lg text-sm"
                     />
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export default function Profile() {
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 text-black rounded-lg text-sm"
                     >
                       <option>Morocco</option>
                       <option>Egypt</option>
@@ -161,7 +161,7 @@ export default function Profile() {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-black text-sm"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export default function Profile() {
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-black"
                   />
                 </div>
               </div>
@@ -189,27 +189,23 @@ export default function Profile() {
                   Travel Information
                 </h3>
 
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-xs text-gray-600 mb-1 block">
+                <div className="flex gap-4 border-none justify-between px-2 py-2 rounded-lg shadow-sm space-y-4">
+                  <div className="self-center">
+                  <div className="mb-3">
+                    <label className="text-xs text-black font-bold mb-1 block">
                       ID Number
                     </label>
-                    <p className="text-sm font-semibold text-gray-900">
-                      38524005820230
-                    </p>
+                    <input type="text" defaultValue={"36524100562030"} className="text-black text-sm bg-[#f8f8f8] py-2 px-2 rounded-lg" disabled />
                   </div>
-
                   <div>
-                    <label className="text-xs text-gray-600 mb-1 block">
+                    <label className="text-xs text-black font-bold mb-1 block">
                       Passport Number
                     </label>
-                    <p className="text-sm font-semibold text-gray-900">
-                      3BFF4ICO
-                    </p>
+                    <input type="text" defaultValue={"36KF41C0"} className="text-black text-sm bg-[#f8f8f8] py-2 px-2 rounded-lg" disabled />
                   </div>
-
+                  </div>
                   <div>
-                    <label className="text-xs text-gray-600 mb-2 block">
+                    <label className="text-xs text-[#838383] font-bold mb-2 block">
                       Reference
                     </label>
                     <div className="w-full h-24 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
@@ -230,7 +226,7 @@ export default function Profile() {
                   </button>
                 </div>
 
-                <div className="space-y-3">
+                <div className="rounded-lg shadow-sm bg-white border py-3 px-2 space-y-3">
                   {[0, 1].map((bank) => (
                     <label
                       key={bank}
