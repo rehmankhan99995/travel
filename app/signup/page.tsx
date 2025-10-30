@@ -8,8 +8,8 @@ export default function TravelSignup() {
 
   const slides = [
     {
-      location: "Explore the Maldives",
-      title: "Adventure awaits beyond the horizon",
+      location: "Explore the World",
+      title: "Adventure starts with Kalma Travels",
       description:
         "Join us today and discover unforgettable destinations and experiences.",
       image: "/bg.png",
