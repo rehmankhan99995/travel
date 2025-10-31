@@ -80,7 +80,7 @@ export default function Payments() {
               Your Plan is up for your need!
             </p>
           </div>
-          <button className="bg-black text-white px-5 py-2 rounded text-base cursor-pointer">
+          <button className="bg-blue-700 text-white px-5 py-2 rounded text-base cursor-pointer">
             Make a new payment
           </button>
         </div>
@@ -94,7 +94,7 @@ export default function Payments() {
             </h3>
           </div>
           <div className="flex gap-5">
-            <button className="bg-black text-white px-4 py-2 cursor-pointer rounded-[10px] text-sm">
+            <button className="bg-blue-700 text-white px-4 py-2 cursor-pointer rounded-[10px] text-sm">
               Explore Plans
             </button>
             <button className="border border-black cursor-pointer text-black px-4 py-2 rounded-[10px] text-sm">

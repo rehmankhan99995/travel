@@ -221,7 +221,7 @@ export default function Profile() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Banking Information
                   </h3>
-                  <button className="px-3 py-1.5 bg-black text-white text-xs font-semibold rounded-lg hover:bg-gray-900">
+                  <button className="px-3 py-1.5 bg-blue-700 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 cursor-pointer">
                     + New Bank
                   </button>
                 </div>
@@ -271,7 +271,7 @@ export default function Profile() {
 
           {/* Save Button at bottom */}
           <div className="mt-8">
-            <button className="px-6 py-2.5 bg-black text-white text-sm font-semibold rounded-lg hover:bg-gray-900">
+            <button className="px-6 py-2.5 bg-blue-700 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 cursor-pointer">
               Save Changes
             </button>
           </div>
