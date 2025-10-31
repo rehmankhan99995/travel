@@ -3,15 +3,58 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, CreditCard, Map, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Package,
+  Bookmark,
+  RefreshCw,
+  Ticket,
+  Dessert as Passport,
+  Upload,
+  Settings,
+} from "lucide-react";
 
-export function Sidebar() {
+export function AgentSidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home, href: "/dashboard" },
-    { id: "payments", label: "Payments", icon: CreditCard, href: "/payments" },
-    { id: "journeys", label: "Journeys", icon: Map, href: "/journeys" },
-    { id: "profile", label: "Profile", icon: User, href: "/profiles" },
+    {
+      id: "available packages",
+      label: "Available packages",
+      icon: Package,
+      href: "/availablepackages",
+    },
+    {
+      id: "My Bookings",
+      label: "My Bookings",
+      icon: Bookmark,
+      href: "/MyBookings",
+    },
+    {
+      id: "Account Statement",
+      label: "Account Statement",
+      icon: CreditCard,
+      href: "/AccountStatement",
+    },
+    { id: "Refunds", label: "Refunds", icon: RefreshCw, href: "/Refunds" },
+    {
+      id: "Hotel Vouchers",
+      label: "Hotel Vouchers",
+      icon: Ticket,
+      href: "/HotelVouchers",
+    },
+    {
+      id: "Visa Services",
+      label: "Visa Services",
+      icon: Passport,
+      href: "/Visa Services",
+    },
+  
+    {
+      id: "Payments Receipts",
+      label: "Payments Receipts",
+      icon: Upload,
+      href: "/Payments Receipts",
+    },
   ];
 
   const getIsActive = (href: string) => {
@@ -26,8 +69,9 @@ export function Sidebar() {
       {/* Logo */}
       <div className="mb-8">
         <h1 className="text-white text-2xl font-bold text-center">
-          Kalma Travels
+          Kalima Travels
         </h1>
+      <p className="text-white  font-bold ">Travel Agent Dashboard</p>
       </div>
 
       {/* Navigation Items */}
