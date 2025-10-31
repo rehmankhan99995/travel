@@ -8,11 +8,11 @@ import "../globals.css"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
-  title: "Travel Agent Dashboard",
-  description: "Travel Agent Dashboard - Manage packages, bookings, and more",
-  generator: "v0.app",
-}
+// export const metadata: Metadata = {
+//   title: "Travel Agent Dashboard",
+//   description: "Travel Agent Dashboard - Manage packages, bookings, and more",
+//   generator: "v0.app",
+// }
 
 export default function RootLayout({
   children,
