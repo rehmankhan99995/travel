@@ -125,7 +125,7 @@ export default function VisaSection() {
 
             <Button
               onClick={() => handleApply(visa)}
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+              className="w-full cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Apply Now
             </Button>

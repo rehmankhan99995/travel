@@ -81,7 +81,7 @@ const handleDownload = () => {
           <h3 className="text-lg font-semibold text-foreground mb-2">Upload Payment Receipt</h3>
           <p className="text-sm text-muted-foreground mb-4">Drag and drop your receipt or click to browse</p>
 
-          <Button variant="outline" className="inline-flex bg-transparent" onClick={handleButtonClick}>
+          <Button variant="outline" className="cursor-pointer inline-flex bg-transparent" onClick={handleButtonClick}>
             <Upload size={16} />
             Select File
           </Button>
@@ -142,7 +142,7 @@ const handleDownload = () => {
                   </div>
                 </div>
               </div>
-              <Button onClick={handleDownload} variant="outline" size="sm" className="md:w-auto bg-transparent">
+              <Button onClick={handleDownload} variant="outline" size="sm" className="cursor-pointer md:w-auto bg-transparent">
                
                 <Download size={16} />
                 Download

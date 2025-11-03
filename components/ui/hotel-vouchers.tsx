@@ -134,7 +134,7 @@ export default function HotelVouchers() {
           </p>
         </div>
         <Button
-          className="bg-blue-700 text-white hover:bg-blue-800"
+          className="bg-blue-700 cursor-pointer text-white hover:bg-blue-800"
           onClick={() => setIsNewDialogOpen(true)}
         >
           <Plus size={18} />
@@ -207,7 +207,7 @@ export default function HotelVouchers() {
 
             <div className="flex gap-2">
               <Button
-                className="flex-1 bg-blue-700 text-white"
+                className="flex-1 cursor-pointer bg-blue-700 text-white"
                 size="sm"
                 onClick={() => handleDownload(voucher)}
               >
@@ -215,8 +215,9 @@ export default function HotelVouchers() {
                 Download
               </Button>
               <Button
+              
                 variant="outline"
-                className="flex-1"
+                className="flex-1 cursor-pointer"
                 size="sm"
                 onClick={() => {
                   setSelectedVoucher(voucher)
@@ -226,6 +227,7 @@ export default function HotelVouchers() {
                 View
               </Button>
               <Button
+                className="cursor-pointer"
                 variant="destructive"
                 size="sm"
                 onClick={() => {
