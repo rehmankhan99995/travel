@@ -1,9 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Dessert as Passport, DollarSign, Clock } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { toast } from "sonner" // ✅ FIXED HERE
+import { Plane } from "lucide-react"
+import { Clock } from 'lucide-react';
+import { DollarSign } from 'lucide-react';
 
 const visaTypes = [
   {
@@ -45,6 +52,22 @@ const visaTypes = [
 ]
 
 export default function VisaSection() {
+  const [selectedVisa, setSelectedVisa] = useState<any>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [form, setForm] = useState({ name: "", passport: "", email: "" })
+
+  const handleApply = (visa: any) => {
+    setSelectedVisa(visa)
+    setIsDialogOpen(true)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsDialogOpen(false)
+    setForm({ name: "", passport: "", email: "" })
+    toast.success(`Visa application for ${selectedVisa.type} submitted successfully! 🎉`)
+  }
+
   return (
     <div className="p-8">
       <div className="mb-8">
@@ -52,6 +75,7 @@ export default function VisaSection() {
         <p className="text-muted-foreground">Apply for visas and check rates set by admin</p>
       </div>
 
+      {/* Visa Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visaTypes.map((visa) => (
           <Card key={visa.id} className="p-6 hover:shadow-lg transition-shadow flex flex-col">
@@ -61,7 +85,7 @@ export default function VisaSection() {
                 <p className="text-sm text-muted-foreground">{visa.country}</p>
               </div>
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Passport size={20} className="text-primary" />
+                <Plane size={20} className="text-primary" />
               </div>
             </div>
 
@@ -99,10 +123,63 @@ export default function VisaSection() {
               </div>
             </div>
 
-            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Apply Now</Button>
+            <Button
+              onClick={() => handleApply(visa)}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Apply Now
+            </Button>
           </Card>
         ))}
       </div>
+
+      {/* Application Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Apply for {selectedVisa?.type}</DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label>Full Name</Label>
+              <Input
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div>
+              <Label>Passport Number</Label>
+              <Input
+                value={form.passport}
+                onChange={(e) => setForm({ ...form, passport: e.target.value })}
+                placeholder="Enter passport number"
+                required
+              />
+            </div>
+
+            <div>
+              <Label>Email Address</Label>
+              <Input
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <DialogFooter>
+              <Button type="submit" className="w-full bg-primary text-white hover:bg-primary/90">
+                Submit Application
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

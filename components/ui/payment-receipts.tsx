@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -29,6 +29,35 @@ const receipts = [
 
 export default function PaymentReceipts() {
   const [isDragging, setIsDragging] = useState(false)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setSelectedFile(file)
+    }
+  }
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    setIsDragging(false)
+    const file = e.dataTransfer.files?.[0]
+    if (file) setSelectedFile(file)
+  }
+const handleDownload = () => {
+  const blob = new Blob(["Hello World"], { type: "text/plain" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = "example.txt"
+  a.click()
+  URL.revokeObjectURL(url)
+}
 
   return (
     <div className="p-8">
@@ -43,16 +72,35 @@ export default function PaymentReceipts() {
           className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
             isDragging ? "border-primary bg-primary/5" : "border-border bg-secondary/30"
           }`}
+          onDragOver={(e) => e.preventDefault()}
           onDragEnter={() => setIsDragging(true)}
           onDragLeave={() => setIsDragging(false)}
+          onDrop={handleDrop}
         >
           <Upload size={32} className="mx-auto mb-3 text-primary" />
           <h3 className="text-lg font-semibold text-foreground mb-2">Upload Payment Receipt</h3>
           <p className="text-sm text-muted-foreground mb-4">Drag and drop your receipt or click to browse</p>
-          <Button variant="outline" className="inline-flex bg-transparent">
+
+          <Button variant="outline" className="inline-flex bg-transparent" onClick={handleButtonClick}>
             <Upload size={16} />
             Select File
           </Button>
+
+          {/* Hidden file input */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileSelect}
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="hidden"
+          />
+
+          {selectedFile && (
+            <p className="text-sm text-green-600 mt-3 font-medium">
+              ✅ Selected: {selectedFile.name}
+            </p>
+          )}
+
           <p className="text-xs text-muted-foreground mt-3">Accepted formats: PDF, JPG, PNG (Max 5MB)</p>
         </div>
       </Card>
@@ -94,7 +142,8 @@ export default function PaymentReceipts() {
                   </div>
                 </div>
               </div>
-              <Button variant="outline" size="sm" className="md:w-auto bg-transparent">
+              <Button onClick={handleDownload} variant="outline" size="sm" className="md:w-auto bg-transparent">
+               
                 <Download size={16} />
                 Download
               </Button>

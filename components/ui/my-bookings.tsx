@@ -1,8 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Calendar, MapPin, Users, DollarSign, ChevronRight } from "lucide-react"
 
 const bookings = [
@@ -15,6 +17,8 @@ const bookings = [
     travelers: 4,
     totalPrice: 10000,
     destination: "Makkah & Madinah",
+    description:
+      "Experience premium accommodation and guided tours in both Makkah and Madinah, with comfortable transport and meals included.",
   },
   {
     id: 2,
@@ -25,10 +29,14 @@ const bookings = [
     travelers: 2,
     totalPrice: 3600,
     destination: "Makkah",
+    description:
+      "Quick and convenient travel to Makkah with a 5-day stay near the Haram, including visa processing and transportation.",
   },
 ]
 
 export default function MyBookings() {
+  const [selectedBooking, setSelectedBooking] = useState<any | null>(null)
+
   return (
     <div className="p-8">
       <div className="mb-8">
@@ -58,48 +66,17 @@ export default function MyBookings() {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Calendar size={18} className="text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground font-medium uppercase">Travel Date</p>
-                      <p className="text-sm font-semibold text-foreground mt-1">{booking.travelDate}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <MapPin size={18} className="text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground font-medium uppercase">Destination</p>
-                      <p className="text-sm font-semibold text-foreground mt-1">{booking.destination}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Users size={18} className="text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground font-medium uppercase">Travelers</p>
-                      <p className="text-sm font-semibold text-foreground mt-1">{booking.travelers}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <DollarSign size={18} className="text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground font-medium uppercase">Total Cost</p>
-                      <p className="text-sm font-bold text-blue-600 mt-1">${booking.totalPrice}</p>
-                    </div>
-                  </div>
+                  <Detail icon={<Calendar size={18} />} label="Travel Date" value={booking.travelDate} />
+                  <Detail icon={<MapPin size={18} />} label="Destination" value={booking.destination} />
+                  <Detail icon={<Users size={18} />} label="Travelers" value={booking.travelers} />
+                  <Detail icon={<DollarSign size={18} />} label="Total Cost" value={`$${booking.totalPrice}`} />
                 </div>
               </div>
 
               <Button
                 variant="outline"
                 className="md:w-auto flex items-center gap-2 border-blue-500 text-blue-600 hover:bg-blue-50 bg-transparent"
+                onClick={() => setSelectedBooking(booking)}
               >
                 View Details
                 <ChevronRight size={16} />
@@ -107,6 +84,71 @@ export default function MyBookings() {
             </div>
           </Card>
         ))}
+      </div>
+
+      {/* Dialog for Booking Details */}
+      <Dialog open={!!selectedBooking} onOpenChange={() => setSelectedBooking(null)}>
+        <DialogContent className="max-w-lg">
+          {selectedBooking && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold text-blue-600">{selectedBooking.packageName}</DialogTitle>
+                <DialogDescription>
+                  Status:{" "}
+                  <Badge
+                    variant={selectedBooking.status === "Confirmed" ? "default" : "secondary"}
+                    className="ml-2"
+                  >
+                    {selectedBooking.status}
+                  </Badge>
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-4 mt-4">
+                <p className="text-muted-foreground">{selectedBooking.description}</p>
+
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <p>
+                    <span className="font-semibold">Booking Date:</span> {selectedBooking.bookingDate}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Travel Date:</span> {selectedBooking.travelDate}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Destination:</span> {selectedBooking.destination}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Travelers:</span> {selectedBooking.travelers}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Total Price:</span> ${selectedBooking.totalPrice}
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
+// helper component for details display
+function Detail({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode
+  label: string
+  value: string | number
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <div className="p-2 bg-blue-100 rounded-lg text-blue-600">{icon}</div>
+      <div>
+        <p className="text-xs text-muted-foreground font-medium uppercase">{label}</p>
+        <p className="text-sm font-semibold text-foreground mt-1">{value}</p>
       </div>
     </div>
   )

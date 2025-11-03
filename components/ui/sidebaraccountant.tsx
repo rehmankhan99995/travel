@@ -30,7 +30,7 @@ export default function Sidebaraccountant() {
   ]
 
   return (
-    <aside className="w-80 bg-gradient-to-b from-blue-600 to-blue-700 text-white flex flex-col h-full">
+    <aside className="w-64  bg-blue-700 text-white flex flex-col h-full">
       {/* Logo */}
       <div className="p-6 border-b border-blue-500/30">
         <h1 className="text-2xl font-bold">Finance Hub</h1>
