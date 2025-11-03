@@ -140,10 +140,11 @@ export default function VisaSection() {
             <DialogTitle>Apply for {selectedVisa?.type}</DialogTitle>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-7">
             <div>
-              <Label>Full Name</Label>
+              <Label className="mt-4">Full Name</Label>
               <Input
+                className="mt-2"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Enter your full name"
@@ -154,6 +155,7 @@ export default function VisaSection() {
             <div>
               <Label>Passport Number</Label>
               <Input
+                className="mt-3"
                 value={form.passport}
                 onChange={(e) => setForm({ ...form, passport: e.target.value })}
                 placeholder="Enter passport number"
@@ -164,6 +166,7 @@ export default function VisaSection() {
             <div>
               <Label>Email Address</Label>
               <Input
+                className="mt-3"
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
