@@ -75,7 +75,7 @@ export default function MyBookings() {
 
               <Button
                 variant="outline"
-                className="md:w-auto flex items-center gap-2 border-blue-500 text-blue-600 hover:bg-blue-50 bg-transparent"
+                className="md:w-auto cursor-pointer flex items-center gap-2 border-blue-500 text-blue-600 hover:bg-blue-50 bg-transparent"
                 onClick={() => setSelectedBooking(booking)}
               >
                 View Details

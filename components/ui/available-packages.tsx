@@ -154,7 +154,7 @@ export default function AvailablePackages() {
 
               <Button
                 onClick={() => handleReserveClick(pkg)}
-                className="w-full bg-blue-600 text-white hover:bg-blue-700 font-semibold py-2"
+                className="w-full bg-blue-600 cursor-pointer text-white hover:bg-blue-700 font-semibold py-2"
               >
                 Reserve Now
               </Button>

@@ -116,7 +116,7 @@ export default function RefundRequests() {
           </p>
         </div>
         <Button
-          className="bg-blue-700 text-white hover:bg-blue-800"
+          className="bg-blue-700 cursor-pointer text-white hover:bg-blue-800"
           onClick={() => setIsNewDialogOpen(true)}
         >
           <Plus size={18} />
@@ -169,6 +169,7 @@ export default function RefundRequests() {
 
               <div className="flex gap-2">
                 <Button
+                className="cursor-pointer"
                   variant="outline"
                   onClick={() => {
                     setSelectedRefund(request)
@@ -179,6 +180,7 @@ export default function RefundRequests() {
                 </Button>
 
                 <Button
+                  className="cursor-pointer"
                   variant="destructive"
                   onClick={() => {
                     setSelectedRefund(request)
