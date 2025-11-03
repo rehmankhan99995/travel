@@ -170,10 +170,11 @@ export default function AvailablePackages() {
             <DialogTitle>Reserve {selectedPackage ? selectedPackage.name : ""}</DialogTitle>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-7">
             <div>
-              <Label htmlFor="name">Full Name</Label>
+              <Label className="mt-3" htmlFor="name">Full Name</Label>
               <Input
+                className="mt-2"
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -190,6 +191,7 @@ export default function AvailablePackages() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="mt-2"
                 placeholder="you@example.com"
               />
             </div>

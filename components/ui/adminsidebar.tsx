@@ -1,59 +1,64 @@
 "use client"
+
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Plane, RefreshCw, Ticket, Package, BarChart3, LogOut } from "lucide-react"
+import { LayoutDashboard, Plane, RefreshCw, Ticket, Package, BarChart3, LogOut, Settings } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function AdminSidebar() {
   const pathname = usePathname()
 
   const navItems = [
-    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-    { name: "Flight Info", href: "/admin/flights", icon: Plane },
-    { name: "Refunds", href: "/admin/refunds", icon: RefreshCw },
-    { name: "Vouchers", href: "/admin/vouchers", icon: Ticket },
-    { name: "Packages", href: "/admin/packages", icon: Package },
-    { name: "Reports", href: "/admin/reports", icon: BarChart3 },
+    { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/flights", label: "Flight Info", icon: Plane },
+    { href: "/admin/refunds", label: "Refunds", icon: RefreshCw },
+    { href: "/admin/vouchers", label: "Vouchers", icon: Ticket },
+    { href: "/admin/packages", label: "Packages", icon: Package },
+    { href: "/admin/reports", label: "Reports", icon: BarChart3 },
   ]
 
   return (
-    <div className="h-full w-full bg-blue-700 text-white flex flex-col">
+    <aside className="w-64 bg-blue-700 text-white flex flex-col h-screen fixed left-0 top-0">
       {/* Logo */}
-      <div className="p-4 flex items-center justify-center border-b border-white">
-        <h1 className="text-lg font-bold text-white">Kalima Travels</h1>
+      <div className="px-6 py-8 border-b border-blue-600 ">
+        <h1 className="text-2xl font-bold text-white">Kalima Travels</h1>
+        <p className="text-xs text-blue-100 mt-1">Admin Dashboard</p>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 py-8 px-3 space-y-4">
+      {/* Navigation Items */}
+      <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
         {navItems.map((item) => {
-          const isActive = pathname === item.href
           const Icon = item.icon
-
+          const isActive = pathname === item.href
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center justify-start gap-2 py-3 px-3 rounded-lg transition-colors ${
-                isActive ? "bg-white text-black" : "text-white hover:bg-white hover:text-black"
-              }`}
-              title={item.name}
+              className={cn(
+                "w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-300 text-sm font-medium",
+                isActive
+                  ? "bg-blue-500 text-white shadow-lg"
+                  : "text-blue-100 hover:bg-blue-600 hover:text-white"
+              )}
             >
-              <Icon className="w-5 h-5" />
-              <span className="text-xs font-medium text-center">{item.name}</span>
+              <Icon size={18} />
+              <span>{item.label}</span>
             </Link>
           )
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="p-3 border-t border-white">
-        <button
-          className="flex items-center justify-start gap-2 w-full py-3 px-3 rounded-lg text-white hover:text-black hover:bg-white transition-colors"
-          title="Logout"
-        >
-          <LogOut className="w-5 h-5" />
-          <span className="text-xs font-medium">Logout</span>
+      {/* Footer items */}
+      <div className="border-t border-blue-600 px-4 py-4 space-y-2">
+        <button className="w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-all text-blue-100 hover:bg-blue-600 hover:text-white text-sm font-medium">
+          <Settings size={18} />
+          <span>Settings</span>
+        </button>
+        <button className="w-full px-4 py-3 rounded-lg flex items-center gap-3 transition-all text-blue-100 hover:bg-red-600 hover:text-white text-sm font-medium">
+          <LogOut size={18} />
+          <span>Logout</span>
         </button>
       </div>
-    </div>
+    </aside>
   )
 }
