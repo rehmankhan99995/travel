@@ -13,7 +13,7 @@ export default function StaffSidebar() {
     <aside className="w-[20%] bg-blue-700 text-white flex flex-col fixed h-screen">
       {/* Logo */}
       <div className="p-4 border-b border-white">
-        <h1 className="text-lg font-bold text-center">Kalima Travels</h1>
+        <h1 className="text-lg font-bold text-center mb-2">Kalima Travels</h1>
       </div>
 
       {/* Navigation */}

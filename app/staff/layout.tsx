@@ -3,15 +3,16 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "../globals.css"
 import StaffSidebar from "@/components/ui/staffsidebar"
+import { Toaster } from "@/components/ui/sonner";
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
-}
+// export const metadata: Metadata = {
+//   title: "Travel Agent Dashboard",
+//   description: "Travel Agent Dashboard - Manage packages, bookings, and more",
+//   generator: "v0.app",
+// }
 
 export default function RootLayout({
   children,
@@ -19,16 +20,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
-        <div className="flex w-full h-screen bg-gray-100">
-          <div className="w-[20%]">
-          <StaffSidebar />
-          </div>
-          <div className="w-[80%]">
-          <main className="flex-1 overflow-auto flex flex-col">{children}</main>
-        </div>
-        </div>
+    <html lang="en" className="overflow-x-hidden">
+      <body className={`font-sans antialiased bg-gray-50`}>
+        <div className="flex w-screen">
+                  <div className="w-[20%]">  
+                  <StaffSidebar />
+                  </div>
+                  <div className="w-[90%]">
+                  <main>{children}</main>
+                  <Toaster richColors position="top-right" />
+                  </div>
+                </div>
       </body>
     </html>
   )
