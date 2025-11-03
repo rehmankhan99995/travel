@@ -3,8 +3,10 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { redirect } from "next/navigation"
 
 export default function HomePage() {
+   redirect("/login")
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       <h1 className="text-4xl font-bold mb-4">Welcome to My App 🚀</h1>
