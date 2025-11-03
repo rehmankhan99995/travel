@@ -4,22 +4,17 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import {
-  Plus,
-  Download,
-  Hotel,
-  Trash2,
-} from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
+import { Plus, Download, Hotel, Trash2 } from "lucide-react"
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+} from "@/components/ui/dropdown-menu" // adjust your import path
 
 interface Voucher {
   id: number
@@ -56,11 +51,6 @@ export default function HotelVouchers() {
     },
   ])
 
-  const [isNewDialogOpen, setIsNewDialogOpen] = useState(false)
-  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
-  const [selectedVoucher, setSelectedVoucher] = useState<Voucher | null>(null)
-
   const [formData, setFormData] = useState({
     hotelName: "",
     voucherId: "",
@@ -70,7 +60,8 @@ export default function HotelVouchers() {
     rate: "",
   })
 
-  // Add new voucher
+  const [selectedVoucher, setSelectedVoucher] = useState<Voucher | null>(null)
+
   const handleAddVoucher = () => {
     if (
       !formData.hotelName ||
@@ -104,19 +95,14 @@ export default function HotelVouchers() {
       checkOut: "",
       rate: "",
     })
-    setIsNewDialogOpen(false)
     toast.success("Voucher created successfully 🎉")
   }
 
-  // Delete voucher
-  const handleDeleteVoucher = () => {
-    if (!selectedVoucher) return
-    setVouchers(vouchers.filter((v) => v.id !== selectedVoucher.id))
-    setIsDeleteDialogOpen(false)
+  const handleDeleteVoucher = (voucherId: number) => {
+    setVouchers(vouchers.filter((v) => v.id !== voucherId))
     toast.success("Voucher deleted 🗑️")
   }
 
-  // Mock download
   const handleDownload = (voucher: Voucher) => {
     toast.success(`Downloading voucher ${voucher.voucherId}...`)
   }
@@ -133,22 +119,82 @@ export default function HotelVouchers() {
             Create and manage hotel booking vouchers
           </p>
         </div>
-        <Button
-          className="bg-blue-700 cursor-pointer text-white hover:bg-blue-800"
-          onClick={() => setIsNewDialogOpen(true)}
-        >
-          <Plus size={18} />
-          Create Voucher
-        </Button>
+
+        {/* Create Voucher Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="bg-blue-700 text-white hover:bg-blue-800 flex items-center gap-2">
+              <Plus size={18} />
+              Create Voucher
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="w-80 p-4 space-y-3">
+            <DropdownMenuLabel className="text-lg font-semibold">
+              Create New Voucher
+            </DropdownMenuLabel>
+
+            <Input
+              placeholder="Hotel Name"
+              value={formData.hotelName}
+              onChange={(e) =>
+                setFormData({ ...formData, hotelName: e.target.value })
+              }
+            />
+            <Input
+              placeholder="Voucher ID"
+              value={formData.voucherId}
+              onChange={(e) =>
+                setFormData({ ...formData, voucherId: e.target.value })
+              }
+            />
+            <Input
+              type="number"
+              placeholder="Nights"
+              value={formData.nights}
+              onChange={(e) =>
+                setFormData({ ...formData, nights: e.target.value })
+              }
+            />
+            <div className="grid grid-cols-2 gap-2">
+              <Input
+                type="date"
+                value={formData.checkIn}
+                onChange={(e) =>
+                  setFormData({ ...formData, checkIn: e.target.value })
+                }
+              />
+              <Input
+                type="date"
+                value={formData.checkOut}
+                onChange={(e) =>
+                  setFormData({ ...formData, checkOut: e.target.value })
+                }
+              />
+            </div>
+            <Input
+              type="number"
+              placeholder="Rate/Night ($)"
+              value={formData.rate}
+              onChange={(e) =>
+                setFormData({ ...formData, rate: e.target.value })
+              }
+            />
+
+            <Button
+              className="w-full bg-blue-700 text-white hover:bg-blue-800"
+              onClick={handleAddVoucher}
+            >
+              Add Voucher
+            </Button>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Voucher Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {vouchers.map((voucher) => (
-          <Card
-            key={voucher.id}
-            className="p-6 hover:shadow-lg transition-shadow"
-          >
+          <Card key={voucher.id} className="p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start gap-3">
                 <div className="p-3 bg-blue-100 rounded-lg">
@@ -172,17 +218,13 @@ export default function HotelVouchers() {
                   <p className="text-xs text-muted-foreground uppercase font-semibold">
                     Check-in
                   </p>
-                  <p className="font-semibold text-foreground">
-                    {voucher.checkIn}
-                  </p>
+                  <p className="font-semibold text-foreground">{voucher.checkIn}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground uppercase font-semibold">
                     Check-out
                   </p>
-                  <p className="font-semibold text-foreground">
-                    {voucher.checkOut}
-                  </p>
+                  <p className="font-semibold text-foreground">{voucher.checkOut}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -190,17 +232,13 @@ export default function HotelVouchers() {
                   <p className="text-xs text-muted-foreground uppercase font-semibold">
                     Nights
                   </p>
-                  <p className="font-semibold text-foreground">
-                    {voucher.nights}
-                  </p>
+                  <p className="font-semibold text-foreground">{voucher.nights}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground uppercase font-semibold">
-                    Rate/Night
+                    Rate/per Night
                   </p>
-                  <p className="font-semibold text-blue-700">
-                    ${voucher.rate}
-                  </p>
+                  <p className="font-semibold text-blue-700">${voucher.rate}</p>
                 </div>
               </div>
             </div>
@@ -215,25 +253,10 @@ export default function HotelVouchers() {
                 Download
               </Button>
               <Button
-              
-                variant="outline"
+                variant="destructive"
                 className="flex-1 cursor-pointer"
                 size="sm"
-                onClick={() => {
-                  setSelectedVoucher(voucher)
-                  setIsViewDialogOpen(true)
-                }}
-              >
-                View
-              </Button>
-              <Button
-                className="cursor-pointer"
-                variant="destructive"
-                size="sm"
-                onClick={() => {
-                  setSelectedVoucher(voucher)
-                  setIsDeleteDialogOpen(true)
-                }}
+                onClick={() => handleDeleteVoucher(voucher.id)}
               >
                 <Trash2 size={16} />
                 Delete
@@ -242,128 +265,6 @@ export default function HotelVouchers() {
           </Card>
         ))}
       </div>
-
-      {/* Create Voucher Dialog */}
-      <Dialog open={isNewDialogOpen} onOpenChange={setIsNewDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create New Voucher</DialogTitle>
-          </DialogHeader>
-
-          <div className="space-y-3">
-            <div>
-              <Label>Hotel Name</Label>
-              <Input
-                value={formData.hotelName}
-                onChange={(e) =>
-                  setFormData({ ...formData, hotelName: e.target.value })
-                }
-                placeholder="Enter hotel name"
-              />
-            </div>
-            <div>
-              <Label>Voucher ID</Label>
-              <Input
-                value={formData.voucherId}
-                onChange={(e) =>
-                  setFormData({ ...formData, voucherId: e.target.value })
-                }
-                placeholder="Enter voucher ID"
-              />
-            </div>
-            <div>
-              <Label>Nights</Label>
-              <Input
-                type="number"
-                value={formData.nights}
-                onChange={(e) =>
-                  setFormData({ ...formData, nights: e.target.value })
-                }
-                placeholder="Enter nights"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <Label>Check-in</Label>
-                <Input
-                  type="date"
-                  value={formData.checkIn}
-                  onChange={(e) =>
-                    setFormData({ ...formData, checkIn: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <Label>Check-out</Label>
-                <Input
-                  type="date"
-                  value={formData.checkOut}
-                  onChange={(e) =>
-                    setFormData({ ...formData, checkOut: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div>
-              <Label>Rate/Night ($)</Label>
-              <Input
-                type="number"
-                value={formData.rate}
-                onChange={(e) =>
-                  setFormData({ ...formData, rate: e.target.value })
-                }
-                placeholder="Enter rate"
-              />
-            </div>
-          </div>
-
-          <DialogFooter className="mt-4">
-            <Button onClick={handleAddVoucher} className="bg-blue-700 text-white">
-              Create
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      {/* View Voucher Dialog */}
-      <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Voucher Details</DialogTitle>
-          </DialogHeader>
-          {selectedVoucher && (
-            <div className="space-y-2 text-sm">
-              <p><strong>Hotel:</strong> {selectedVoucher.hotelName}</p>
-              <p><strong>Voucher ID:</strong> {selectedVoucher.voucherId}</p>
-              <p><strong>Check-in:</strong> {selectedVoucher.checkIn}</p>
-              <p><strong>Check-out:</strong> {selectedVoucher.checkOut}</p>
-              <p><strong>Nights:</strong> {selectedVoucher.nights}</p>
-              <p><strong>Rate/Night:</strong> ${selectedVoucher.rate}</p>
-              <p><strong>Status:</strong> {selectedVoucher.status}</p>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
-
-      {/* Delete Confirmation */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete Voucher</DialogTitle>
-          </DialogHeader>
-          <p className="text-sm text-muted-foreground">
-            Are you sure you want to delete this voucher? This action cannot be undone.
-          </p>
-          <DialogFooter className="mt-4">
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button variant="destructive" onClick={handleDeleteVoucher}>
-              Delete
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }

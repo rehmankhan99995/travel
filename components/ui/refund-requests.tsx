@@ -39,7 +39,7 @@ export default function RefundRequests() {
       packageName: "Umrah Premium Package",
       status: "Approved",
       requestDate: "2024-10-15",
-      amount: 500,
+      amount: 10000,
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ export default function RefundRequests() {
       packageName: "Makkah Express",
       status: "Pending",
       requestDate: "2024-10-25",
-      amount: 300,
+      amount: 3600,
     },
   ])
 
@@ -202,10 +202,11 @@ export default function RefundRequests() {
           <DialogHeader>
             <DialogTitle>New Refund Request</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4 mt-2">
-            <div>
+          <div className="space-y-5 mt-6">
+            <div className="">
               <Label>Booking ID</Label>
               <Input
+                className="mt-2"
                 value={formData.bookingId}
                 onChange={(e) =>
                   setFormData({ ...formData, bookingId: e.target.value })
@@ -216,6 +217,7 @@ export default function RefundRequests() {
             <div>
               <Label>Package Name</Label>
               <Input
+                className="mt-2"
                 value={formData.packageName}
                 onChange={(e) =>
                   setFormData({ ...formData, packageName: e.target.value })
@@ -226,6 +228,7 @@ export default function RefundRequests() {
             <div>
               <Label>Amount</Label>
               <Input
+                className="mt-2"
                 type="number"
                 value={formData.amount}
                 onChange={(e) =>

@@ -14,7 +14,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { CheckCircle2, MapPin, Calendar, Plane } from "lucide-react"
-import { toast } from "sonner"
+import { Toaster, toast } from "sonner"
 
 const packages = [
   {
