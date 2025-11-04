@@ -1,52 +1,121 @@
-import type React from "react"
+"use client"
+
+import React, { useState } from "react"
 import Sidebaraccountant from "@/components/ui/sidebaraccountant"
+import { Bell, ChevronDown, LogOut, LogIn } from "lucide-react"
+import { toast, Toaster } from "sonner"
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [checkedIn, setCheckedIn] = useState(false)
+
+  // ✅ Check-in / Check-out function
+  const handleCheck = async () => {
+    setIsProcessing(true)
+    toast.loading("Processing...", { duration: 1000 })
+
+    setTimeout(() => {
+      setCheckedIn(!checkedIn)
+      toast.success(checkedIn ? "Checked out successfully!" : "Checked in successfully!")
+      setIsProcessing(false)
+    }, 1000)
+  }
+
+  // ✅ Logout function
+  const handleLogout = () => {
+    toast.info("You have been logged out.")
+    setIsDropdownOpen(false)
+  }
+
+  // ✅ Notification button
+  const handleNotification = () => {
+    toast.info("No new notifications", {
+      description: "You're all caught up!",
+    })
+  }
+
   return (
-    <div className="flex h-screen bg-background">
-      <Sidebaraccountant/>
+    <div className="flex h-screen bg-gray-50 text-gray-900">
+      {/* ✅ Fixed Sidebar */}
+      <Sidebaraccountant />
 
-      <main className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <header className="border-b border-border bg-card px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">Accountant Dashboard</h1>
-              <p className="text-muted-foreground mt-1">Manage financial operations & approvals</p>
-            </div>
+      {/* ✅ Main content area with margin to avoid overlapping the sidebar */}
+      <main className="flex-1 ml-64 flex flex-col overflow-hidden">
+        {/* ✅ Toaster (must be inside layout to show notifications) */}
+        <Toaster position="top-right" richColors />
 
-            <div className="flex items-center gap-4">
-              <button className="relative p-2 hover:bg-muted rounded-lg transition">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-                <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
-              </button>
+        {/* ✅ Header */}
+        <header className="border-b bg-white shadow-sm px-8 py-4 flex items-center justify-between">
+          {/* Left Section */}
+          <div>
+            <h1 className="text-2xl font-bold">Accountant Dashboard</h1>
+            <p className="text-gray-500 text-sm">Manage financial operations & approvals</p>
+          </div>
 
-              <div className="flex items-center gap-3 pl-4 border-l border-border">
+          {/* Right Section */}
+          <div className="flex items-center gap-4">
+            {/* 🔔 Notification Button */}
+            <button
+              onClick={handleNotification}
+              className="relative p-2 rounded-lg hover:bg-gray-100 transition"
+            >
+              <Bell className="w-6 h-6" />
+              <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full"></span>
+            </button>
+
+            {/* 👤 User Dropdown */}
+            <div className="relative">
+              <div
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="flex items-center gap-2 cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-lg px-3 py-2 transition"
+              >
                 <div className="text-right">
-                  <p className="font-medium text-foreground">Admin User</p>
-                  <p className="text-sm text-muted-foreground">Accountant</p>
+                  <p className="font-medium text-gray-800">Admin User</p>
+                  <p className="text-sm text-gray-500">Accountant</p>
                 </div>
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
                   A
                 </div>
+                <ChevronDown className="w-4 h-4 text-gray-600" />
               </div>
+
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50">
+                  <button
+                    onClick={handleCheck}
+                    disabled={isProcessing}
+                    className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                  >
+                    {checkedIn ? (
+                      <>
+                        <LogOut className="w-4 h-4" /> Check Out
+                      </>
+                    ) : (
+                      <>
+                        <LogIn className="w-4 h-4" /> Check In
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" /> Logout
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </header>
 
-        {/* Main Content */}
-        <div className="flex-1 overflow-auto">{children}</div>
+        {/* ✅ Scrollable main content area */}
+        <div className="flex-1 overflow-auto p-8">{children}</div>
       </main>
     </div>
   )

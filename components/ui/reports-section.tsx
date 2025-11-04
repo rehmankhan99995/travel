@@ -1,11 +1,22 @@
 "use client"
 
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, XCircle, Clock } from "lucide-react"
+import { toast } from "sonner"
+
+interface RefundRequest {
+  id: number
+  agent: string
+  amount: string
+  reason: string
+  status: "pending" | "approved" | "rejected"
+  date: string
+}
 
 export default function ReportsSection() {
-  const refundRequests = [
+  const [refundRequests, setRefundRequests] = useState<RefundRequest[]>([
     {
       id: 1,
       agent: "John Smith",
@@ -30,9 +41,17 @@ export default function ReportsSection() {
       status: "approved",
       date: "2024-11-02",
     },
-    { id: 4, agent: "Emma Wilson", amount: "$450", reason: "Price adjustment", status: "rejected", date: "2024-11-02" },
-  ]
+    {
+      id: 4,
+      agent: "Emma Wilson",
+      amount: "$450",
+      reason: "Price adjustment",
+      status: "rejected",
+      date: "2024-11-02",
+    },
+  ])
 
+  // ✅ Status Icon Renderer
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "pending":
@@ -46,8 +65,41 @@ export default function ReportsSection() {
     }
   }
 
+  // ✅ Approve / Reject Handler
+  const handleAction = (id: number, action: "approved" | "rejected") => {
+    setRefundRequests((prev) =>
+      prev.map((req) => (req.id === id ? { ...req, status: action } : req))
+    )
+
+    // 🔔 Toast feedback
+    toast.success(
+      action === "approved" ? "✅ Refund Approved" : "❌ Refund Rejected",
+      {
+        description:
+          action === "approved"
+            ? "The refund has been successfully approved."
+            : "The refund request has been rejected.",
+      }
+    )
+  }
+
+  // ✅ Add New User Simulation
+  const handleAddUser = () => {
+    toast.info("👤 Add New User", {
+      description: "Redirecting to user creation form...",
+    })
+  }
+
+  // ✅ Add New Hotel Simulation
+  const handleAddHotel = () => {
+    toast.info("🏨 Add New Hotel Partner", {
+      description: "Redirecting to hotel creation form...",
+    })
+  }
+
   return (
     <div className="space-y-6">
+      {/* Refund Requests Section */}
       <Card>
         <CardHeader>
           <CardTitle>Refund Requests (Review & Approve)</CardTitle>
@@ -61,30 +113,42 @@ export default function ReportsSection() {
                 className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 transition"
               >
                 <div className="flex items-center gap-4 flex-1">
-                  <div className="flex-shrink-0">{getStatusIcon(request.status)}</div>
-                  <div className="flex-1">
+                  <div>{getStatusIcon(request.status)}</div>
+                  <div>
                     <p className="font-medium text-foreground">{request.agent}</p>
                     <p className="text-sm text-muted-foreground">{request.reason}</p>
                   </div>
                 </div>
+
                 <div className="text-right mr-6">
                   <p className="font-bold text-foreground">{request.amount}</p>
                   <p className="text-xs text-muted-foreground">{request.date}</p>
                 </div>
-                {request.status === "pending" && (
+
+                {/* Action Buttons or Status Badge */}
+                {request.status === "pending" ? (
                   <div className="flex gap-2">
-                    <Button size="sm" variant="default">
+                    <Button
+                      size="sm"
+                      variant="default"
+                      onClick={() => handleAction(request.id, "approved")}
+                    >
                       Approve
                     </Button>
-                    <Button size="sm" variant="outline">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleAction(request.id, "rejected")}
+                    >
                       Reject
                     </Button>
                   </div>
-                )}
-                {request.status !== "pending" && (
+                ) : (
                   <span
                     className={`text-sm font-medium px-3 py-1 rounded-full ${
-                      request.status === "approved" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                      request.status === "approved"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
                     }`}
                   >
                     {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
@@ -96,7 +160,9 @@ export default function ReportsSection() {
         </CardContent>
       </Card>
 
+      {/* User & Hotel Management */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* User Management */}
         <Card>
           <CardHeader>
             <CardTitle>User Management</CardTitle>
@@ -112,11 +178,14 @@ export default function ReportsSection() {
                 <p className="font-medium text-foreground">Active Agents: 156</p>
                 <p className="text-sm text-muted-foreground">Premium & Standard tiers</p>
               </div>
-              <Button className="w-full">+ Add New User</Button>
+              <Button className="w-full" onClick={handleAddUser}>
+                + Add New User
+              </Button>
             </div>
           </CardContent>
         </Card>
 
+        {/* Hotel Management */}
         <Card>
           <CardHeader>
             <CardTitle>Hotel Management</CardTitle>
@@ -132,7 +201,9 @@ export default function ReportsSection() {
                 <p className="font-medium text-foreground">Pending Approvals: 12</p>
                 <p className="text-sm text-muted-foreground">New partnerships waiting</p>
               </div>
-              <Button className="w-full">+ Add Hotel Partner</Button>
+              <Button className="w-full" onClick={handleAddHotel}>
+                + Add Hotel Partner
+              </Button>
             </div>
           </CardContent>
         </Card>
