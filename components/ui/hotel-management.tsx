@@ -73,6 +73,7 @@ export default function HotelManagement() {
           </DialogHeader>
           <div className="space-y-3">
             <Input
+              className="mt-5"
               placeholder="Hotel Name"
               value={hotelName}
               onChange={(e) => setHotelName(e.target.value)}
