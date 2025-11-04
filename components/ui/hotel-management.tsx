@@ -104,7 +104,7 @@ export default function HotelManagement() {
           <DialogHeader>
             <DialogTitle>All Hotels</DialogTitle>
           </DialogHeader>
-          <div className="max-h-60 overflow-y-auto space-y-2">
+          <div className="max-h-60 mt-3 overflow-y-auto space-y-2">
             {[
               "Hilton Makkah",
               "Raffles Jeddah",
