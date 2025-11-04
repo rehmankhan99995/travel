@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Ensure dark variants work properly */
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -33,13 +34,14 @@
   --destructive: oklch(0.58 0.2 30); /* Red */
   --destructive-foreground: oklch(0.98 0 0);
 
-  /* All chart colors now blue shades */
+  /* Chart colors (all blue shades) */
   --chart-1: #1e40af; /* blue-800 */
   --chart-2: #3b82f6; /* blue-500 */
   --chart-3: #60a5fa; /* blue-400 */
   --chart-4: #93c5fd; /* blue-300 */
   --chart-5: #bfdbfe; /* blue-200 */
 
+  /* Radius and Sidebar */
   --radius: 0.625rem;
   --sidebar: #1e40af; /* blue-800 */
   --sidebar-foreground: oklch(0.98 0 0);
@@ -74,6 +76,8 @@
 
   --destructive: oklch(0.6 0.15 30);
   --destructive-foreground: oklch(0.15 0.05 30);
+
+  /* Sidebar */
   --sidebar: #1e40af;
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: #3b82f6;
@@ -85,7 +89,6 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -124,10 +127,12 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Base styles restored from original */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
