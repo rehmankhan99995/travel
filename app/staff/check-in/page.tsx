@@ -180,7 +180,7 @@ export default function CheckInPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700"
                     >
                       <option value="Check-in">Check-in</option>
-                      <option value="Check-out">Check-out</option>
+                      {/* <option value="Check-out">Check-out</option> */}
                     </select>
                   </div>
 
